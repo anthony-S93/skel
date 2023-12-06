@@ -1,0 +1,32 @@
+#!/bin/sh
+
+bin_dir="$(dirname "$(readlink -f "$0")")"
+skel_home="$(dirname "$bin_dir")"
+virtual_env="$skel_home/.venv"
+program_entry_point="$skel_home/src/main.py"
+
+
+report_broken_venv() {
+    echo "Something is wrong with the virtual environment."
+    echo "Delete the \"$virtual_env\" directory and run the setup script again."
+    exit 1
+}
+
+
+if [ -d "$virtual_env" ]
+then
+    if [ ! -f "$virtual_env/bin/activate" ]
+    then
+        echo "Missing activation script."
+        report_broken_venv
+    fi
+
+    # Activate virtual environment
+    . "$virtual_env/bin/activate"
+
+    # Run application
+    python "$program_entry_point" "$@"
+else
+    echo "No virtual environment."
+    echo "Run the setup script first."
+fi
