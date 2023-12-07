@@ -1,6 +1,17 @@
 # skel
 A minimalist tool that generates skeleton directories based on XML files.
 
+## Installation
+Clone this repo and place it in your home directory (or anywhere you like). `cd` into the repo and run the setup script.
+```
+cd /path/to/cloned/repo
+./setup.sh
+```
+At this point, you have a few options:
+- Add the `bin` directory inside the application's installation directory to `PATH`
+- Add a symbolic link somewhere onto your `PATH`. The symlink should point to `/path/to/cloned/repo/bin/skel`
+- Define an alias that your shell will translate to the full path of the executable. E.g: `alias skel="/path/to/cloned/repo/bin/skel"` 
+
 ## Usage
 ```
 skel <template> [targets...]
